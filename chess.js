@@ -174,6 +174,8 @@ window.onload = function() {
     }
     function resetBoard() {
         boardState = JSON.parse(JSON.stringify(initialBoardState));
+        document.getElementById('blackCaptured').innerHTML = ''; 
+        document.getElementById('whiteCaptured').innerHTML = ''; 
         createBoard();
     }
     function highlightMoves(piece, from) {
