@@ -45,3 +45,18 @@ body {
 .highlight {
     background-color: orange !important;
 }
+#capturedPieces {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#blackCaptured, #whiteCaptured {
+    display: flex;
+    flex-wrap: wrap;
+    width: 45%;
+    border: 1px solid #000;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
