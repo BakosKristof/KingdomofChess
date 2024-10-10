@@ -76,6 +76,26 @@ window.onload = function() {
             }
         }
     }
+    function movePiece(piece, from, toRow, toCol) {
+        const targetPiece = boardState[toRow][toCol];
+        if (targetPiece !== ' ') {
+            capturePiece(targetPiece);
+        }
+        
+        boardState[toRow][toCol] = piece;
+        boardState[from.row][from.col] = ' ';
+        createBoard();
+        checkWinner();
+    }
+
+    function capturePiece(piece) {
+        const capturedDiv = piece === piece.toUpperCase() ? document.getElementById('blackCaptured') : document.getElementById('whiteCaptured');
+        const pieceElement = document.createElement('div');
+        pieceElement.classList.add('capturedPiece');
+        pieceElement.textContent = pieces[piece];
+        capturedDiv.appendChild(pieceElement);
+    }
+    
     function isValidMove(piece, from, toRow, toCol) {
         const rowDiff = toRow - from.row;
         const colDiff = toCol - from.col;
@@ -131,13 +151,7 @@ window.onload = function() {
                 if (Math.abs(rowDiff) <= 1 && Math.abs(colDiff) <= 1) return true;
                 break;
         }
-        return false;
-    }
-    function movePiece(piece, from, toRow, toCol) {
-        boardState[toRow][toCol] = piece;
-        boardState[from.row][from.col] = ' ';
-        createBoard();
-        checkWinner();
+        return false
     }
     function updateScoreboard() {
         document.getElementById('whiteWins').textContent = whiteWins;
@@ -161,17 +175,6 @@ window.onload = function() {
     function resetBoard() {
         boardState = JSON.parse(JSON.stringify(initialBoardState));
         createBoard();
-    }
-    function resetScores() {
-        console.log("Resetting scores...");
-        blackWins = 0;
-        whiteWins = 0;
-        console.log("White Wins:", whiteWins, "Black Wins:", blackWins);
-        updateScoreboard();
-    }
-    function delee() {
-        resetScores();
-        resetBoard();
     }
     function highlightMoves(piece, from) {
         for (let row = 0; row < 8; row++) {
